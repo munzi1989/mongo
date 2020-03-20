@@ -6,7 +6,7 @@ exports.insertDocument = (db, document, collection) => {
 
 exports.findDocuments = (db, collection) => {
     const coll = db.collection(collection);
-   return coll.find().toArray();
+   return coll.find({}).toArray();
 };
 
 exports.removeDocument = (db, document, collection) => {

@@ -12,11 +12,12 @@ MongoClient.connect(url, { useUnifiedTopology: true }).then(client => {
 
     db.dropCollection('campsites')
     .then(result => {
-        console.log('Dropped Collection', result);
-
-        return dboper.insertDocument(db, { name: "Breadcrumb Trail Campground", description: "Test" },
-            'campsites');
+        console.log('Dropped Collection:', result);
     })
+    .catch(err => console.log('No collection to drop.'));
+
+    dboper.insertDocument(db, { name: "Breadcrumb Trail Campground", description: "Test" },
+    'campsites')
     .then(result => {
         console.log('Insert Document:', result.ops);
 
@@ -24,6 +25,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }).then(client => {
     })
     .then(docs => {
         console.log('Found documents:', docs);
+        
         return dboper.updateDocument(db, { name: "Breadcrumb Trail Campground" },
             { description: "Updated test description" }, 'campsites');
     })
